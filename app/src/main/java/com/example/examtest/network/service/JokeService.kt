@@ -1,5 +1,6 @@
-package com.example.examtest
+package com.example.examtest.network.service
 
+import com.example.examtest.model.remote.JokeDataRemote
 import retrofit2.Response
 import retrofit2.http.GET
 

@@ -1,4 +1,4 @@
-package com.example.examtest
+package com.example.examtest.network
 
 sealed class ResponseWrapper<out T> {
     data object Loading : ResponseWrapper<Nothing>()

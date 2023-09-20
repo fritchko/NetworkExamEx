@@ -1,6 +1,8 @@
-package com.example.examtest
+package com.example.examtest.model.remote
 
 
+import com.example.examtest.model.local.JokeDataLocal
+import com.example.examtest.network.ResponseWrapper
 import com.google.gson.annotations.SerializedName
 import retrofit2.Response
 
@@ -18,8 +20,8 @@ data class JokeDataRemote(
 fun Response<JokeDataRemote>.toJokeDataLocal(): ResponseWrapper<JokeDataLocal> {
     return if( this.isSuccessful ){
         val response = this.body()
-        ResponseWrapper.Success(JokeDataLocal(response?.punchline,response?.setup))
+        ResponseWrapper.Success(JokeDataLocal(response?.punchline, response?.setup))
     } else{
-        ResponseWrapper.Error(this.errorBody()?.string().orEmpty(),this.code())
+        ResponseWrapper.Error(this.errorBody()?.string().orEmpty(), this.code())
     }
 }

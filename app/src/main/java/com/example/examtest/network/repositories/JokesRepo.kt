@@ -1,5 +1,9 @@
-package com.example.examtest
+package com.example.examtest.network.repositories
 
+import com.example.examtest.model.local.JokeDataLocal
+import com.example.examtest.model.remote.toJokeDataLocal
+import com.example.examtest.network.ResponseWrapper
+import com.example.examtest.network.service.JokeService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

@@ -1,4 +1,4 @@
-package com.example.examtest
+package com.example.examtest.model.local
 
 
 data class JokeDataLocal(
