@@ -6,6 +6,6 @@ import retrofit2.http.GET
 interface JokeService {
 
     @GET("jokes/random")
-    suspend fun getJokes(): Response<JokeData>
+    suspend fun getJokes(): Response<JokeDataRemote>
 
 }

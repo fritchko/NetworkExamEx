@@ -9,16 +9,16 @@ import kotlinx.coroutines.launch
 
 class JokesViewModel: ViewModel() {
 
-    var result = MutableLiveData<JokeData?>()
+    var result = MutableLiveData<JokeDataLocal?>()
 
     fun getJokes(){
         viewModelScope.launch(IO){
             var response = JokesRepo.getJokes()
-            if (response?.isSuccessful == true){
-                result.postValue(response.body())
-                Log.i("NETWORK DATA","${response.body()}")
-            } else {
-                Log.e("NETWORK ERROR","CHE MINCHIA FAI")
+            if (response is ResponseWrapper.Success){
+                result.postValue(response.value)
+                Log.i("NETWORK DATA","${response.value}")
+            } else if( response is ResponseWrapper.Error ){
+                Log.e("NETWORK ERROR","|${response.code}| | ${response.message} |")
             }
         }
     }

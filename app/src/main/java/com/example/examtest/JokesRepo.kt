@@ -2,7 +2,6 @@ package com.example.examtest
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -11,12 +10,16 @@ object JokesRepo {
 
     var jokeService: JokeService? = null
 
-    suspend fun getJokes(): Response<JokeData>? {
-        if (jokeService == null){
+    suspend fun getJokes(): ResponseWrapper<JokeDataLocal>? {
+        if (jokeService == null) {
             jokeService = createRetrofitInstance().create(JokeService::class.java)
         }
 
-        return jokeService?.getJokes()
+        val response = jokeService?.getJokes()
+
+        return response?.toJokeDataLocal()
+
+
     }
 
 
@@ -29,9 +32,9 @@ object JokesRepo {
 
         val httpClient = OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
-            .connectTimeout(30,TimeUnit.SECONDS)
-            .readTimeout(30,TimeUnit.SECONDS)
-            .writeTimeout(30,TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .build()
 
         return Retrofit.Builder()
